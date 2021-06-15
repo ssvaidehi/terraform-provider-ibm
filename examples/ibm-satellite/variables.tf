@@ -14,6 +14,7 @@ variable "ibm_region" {
 
 variable "resource_group" {
   description = "Name of the resource group on which location has to be created"
+  default = "Default"
 }
 
 ##################################################
@@ -21,13 +22,13 @@ variable "resource_group" {
 ##################################################
 variable "location" {
   description = "Location Name"
-  default     = "satellite-ibm"
+  default     = "vee-satellite-ibm"
 }
 
 variable "managed_from" {
   description  = "The IBM Cloud region to manage your Satellite location from. Choose a region close to your on-prem data center for better performance."
   type         = string
-  default      = "wdc"  
+  default      = "wdc"
 }
 
 variable "location_zones" {
@@ -50,7 +51,7 @@ variable "is_location_exist" {
 variable "host_labels" {
   description = "Labels to add to attach host script"
   type        = list(string)
-  default     = ["env:prod"]
+  default     = ["env:controlplane"]
 
   validation {
       condition     = can([for s in var.host_labels : regex("^[a-zA-Z0-9:]+$", s)])
@@ -76,7 +77,7 @@ variable "host_count" {
 variable "addl_host_count" {
   description    = "The total number of additional host for cluster assignment"
   type           = number
-  default        = 6
+  default        = 3
 }
 
 variable "is_prefix" {
